@@ -12,6 +12,7 @@ def jacobian(y, x, create_graph=False):
         grad_y[i] = 0.                                                                                
     return torch.stack(jac).reshape(y.shape + x.shape)
 
+
 def solve_ls(A: Tensor, b: Tensor, abs: float = 1e-6, rel: float = 1e-6) -> Tensor:
     # Solves the system A x = b in a least-squares sense using SVD, and returns x
     U, S, V = torch.svd(A)
@@ -20,11 +21,13 @@ def solve_ls(A: Tensor, b: Tensor, abs: float = 1e-6, rel: float = 1e-6) -> Tens
     Sinv = torch.where(S >= th, 1.0 / S, torch.zeros_like(S))
     return V @ torch.diag(Sinv) @ (U.transpose(1, 0) @ b)
 
+
 def flatten(*z: Tensor):
     # Flattens a sequence of tensors into one "long" tensor of shape (N,)
     # Note: cat & reshape maintain differentiability!
     flat_z = torch.cat([z_.reshape(-1) for z_ in z], dim=0)
     return flat_z
+
 
 def unflatten_like(t_flat: Tensor, *z: Tensor):
     # Un-flattens a "long" tensor into a sequence of multiple tensors of arbitrary shape
@@ -40,6 +43,7 @@ def unflatten_like(t_flat: Tensor, *z: Tensor):
     assert offset == t_flat.numel()
     
     return tuple(ts)
+	
 	
 def onehot(y: Tensor, n_classes: int) -> Tensor:
     """
