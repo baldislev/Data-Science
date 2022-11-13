@@ -95,13 +95,13 @@ def chars_to_labelled_samples(text: str, char_to_idx: dict, seq_len: int, device
     dimension.
     """
     N = (len(text)-1) // seq_len  # -1 because last char has no label, so don't use it
-    char_to_idx_len = len(char_to_idx)
+    char_to_idx_len = len(char_to_idx)  # V
     embedded_samples = chars_to_onehot(text, char_to_idx)[:N*seq_len]
-    samples = torch.reshape(embedded_samples, (N, seq_len, char_to_idx_len)).to(device=device)
+    samples = torch.reshape(embedded_samples, (N, seq_len, char_to_idx_len)).to(device=device)  # (N, S, V)
 
     embedded_labels = chars_to_onehot(text, char_to_idx)[1:N*seq_len+1]
     embedded_labels = embedded_labels.nonzero(as_tuple=True)[1]
-    labels = torch.reshape(embedded_labels, (N, seq_len)).to(device=device)
+    labels = torch.reshape(embedded_labels, (N, seq_len)).to(device=device)  # (N, S)
     return samples, labels
 
 
