@@ -1,0 +1,50 @@
+name: cs236781-tutorials
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  # common
+  - ffmpeg=4.2.2 # version 4.3 doesn't work with x264 through gym.Monitor
+  - freetype
+  - graphviz
+  - ipython
+  - jupyter
+  - jupyterlab
+  - matplotlib
+  - networkx
+  - nltk # for torchtext SST dataset
+  - nodejs
+  - numba
+  - numpy
+  - opencv
+  - pandas
+  - pillow
+  - pip
+  - pytest
+  - pytest-cov
+  - pytest-xdist
+  - python-graphviz # for graphviz on Windows
+  - python=3.8.12
+  - rise
+  - scikit-learn
+  - scipy
+  - spacy-model-en_core_web_sm=2.3
+  - spacy=2.3
+  - swig # for box2d on Windows
+  - torchtext
+  - torchvision
+  - tqdm
+  - x264
+  - pip:
+    - torchviz
+    - nbmerge
+    - gym[atari,accept-rom-license,box2d]==0.21.0
+    # There's no conda package for this version yet.
+    - https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.3.0/de_core_news_sm-2.3.0.tar.gz
+  # pytorch
+  - pytorch=1.6
+  - torchvision=0.7
+  - cudatoolkit
+  - torchtext
+
